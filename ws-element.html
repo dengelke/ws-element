@@ -1,0 +1,53 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+
+<!--
+`ws-element`
+Polymer based websocket element
+
+@demo demo/index.html 
+-->
+
+<dom-module id="ws-element">
+  <template>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'ws-element',
+      _socket: null,
+      properties: {
+        protocol: {
+          type: String,
+        },
+        url: {
+          type: String
+        }
+      },
+      ready: function() {
+        this._socket = new WebSocket(this.url, this.protocol);
+        this._socket.onclose = this._onClose.bind(this);
+        this._socket.onerror = this._onError.bind(this);
+        this._socket.onmessage = this._onMessage.bind(this);
+        this._socket.onopen = this._onOpen.bind(this);
+      },
+      _onClose: function(e) {
+        this.fire('close', e);
+      },
+      _onError: function(e) {
+        this.fire('error', e);
+      },
+      _onMessage: function(e) {
+        this.fire('message', e.data);
+      },
+      _onOpen: function(e) {
+        this.fire('open');
+      },
+      send: function(message) {
+        this.socket.send(message);
+      },
+      close: function() {
+        this.socket.close();
+      },
+    });
+  </script>
+</dom-module>
