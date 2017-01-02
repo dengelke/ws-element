@@ -43,10 +43,10 @@ Polymer based websocket element
         this.fire('open');
       },
       send: function(message) {
-        this.socket.send(message);
+        this._socket.send(message);
       },
       close: function() {
-        this.socket.close();
+        this._socket.close();
       },
     });
   </script>
