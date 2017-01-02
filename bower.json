@@ -1,5 +1,6 @@
 {
   "name": "ws-element",
+  "version": "0.0.3",
   "description": "Polymer based websocket element",
   "main": "ws-element.html",
   "dependencies": {
